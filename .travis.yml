@@ -1,0 +1,14 @@
+sudo: false
+language: ruby
+rvm:
+  - 2.0.0
+  - 2.1.10
+  - 2.2.5
+  - 2.3.1
+matrix:
+  include:
+    - rvm: jruby
+      env: JRUBY_OPTS='-Xcompat.version=2.0'
+bundler_args: --without guard
+before_install:
+  - if [ "jruby" != "$TRAVIS_RUBY_VERSION"  ]; then gem install bundler; fi
