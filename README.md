@@ -1,5 +1,8 @@
 # Unnatural
 
+[![Gem Version](https://badge.fury.io/rb/unnatural.svg)](https://rubygems.org/gems/unnatural)
+[![Build Status](https://travis-ci.org/bjmllr/unnatural.svg)](https://travis-ci.org/bjmllr/unnatural)
+
 A natural sort for Ruby.
 
 Unnatural defines a natural sort as one where:
