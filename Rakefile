@@ -7,8 +7,6 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/**/*_test.rb']
 end
 
-task default: :test
-
 require 'rake/extensiontask'
 spec = Gem::Specification.load('unnatural.gemspec')
 Rake::ExtensionTask.new do |ext|
@@ -20,4 +18,10 @@ end
 
 task :benchmark do
   require './test/benchmark.rb'
+end
+
+if RUBY_ENGINE == 'jruby'
+  task default: :test
+else
+  task default: [:compile, :test]
 end
