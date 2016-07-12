@@ -6,6 +6,14 @@ unless RUBY_ENGINE == 'jruby'
       def self.sort(enumerable)
         enumerable.sort { |a, b| compare(a, b) }
       end
+
+      def self.sort_by(enumerable)
+        raise ArgumentError, "Block expected but none given" unless block_given?
+        enumerable
+          .map { |e| [(yield e), e] }
+          .sort { |a, b| compare(a, b) }
+          .map { |ary| ary[1] }
+      end
     end
   end
 

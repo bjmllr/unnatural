@@ -8,17 +8,28 @@ static VALUE rb_mFast;
 #define IS_LOWER(C) ('a' <= C && C <= 'z')
 #define UPCASE(C)   (IS_LOWER(C) ? C - ('a' - 'A') : C)
 
-VALUE compare(VALUE self, VALUE a_value, VALUE b_value) {
-  int a_length = RSTRING_LEN(a_value);
-  int b_length = RSTRING_LEN(b_value);
-  char* a_str = RSTRING_PTR(a_value);
-  char* b_str = RSTRING_PTR(b_value);
-  int a_pos = 0;
-  int b_pos = 0;
-  int a_number = 0;
-  int b_number = 0;
-  char a, b;
-  int diff = 0;
+VALUE compare(VALUE self, VALUE a_arg, VALUE b_arg) {
+  VALUE a_value, b_value;
+  int a_length, b_length, a_pos, b_pos, a_number, b_number, diff;
+  char *a_str, *b_str, a, b;
+
+  if (RB_TYPE_P(a_arg, T_ARRAY)) {
+    a_value = rb_ary_entry(a_arg, 0);
+    b_value = rb_ary_entry(b_arg, 0);
+  } else {
+    a_value = a_arg;
+    b_value = b_arg;
+  }
+
+  a_length = RSTRING_LEN(a_value);
+  b_length = RSTRING_LEN(b_value);
+  a_str = RSTRING_PTR(a_value);
+  b_str = RSTRING_PTR(b_value);
+  a_pos = 0;
+  b_pos = 0;
+  a_number = 0;
+  b_number = 0;
+  diff = 0;
 
   for (a_pos = 0, b_pos = 0; a_pos < a_length && b_pos < b_length; a_pos++, b_pos++) {
     a = a_str[a_pos];

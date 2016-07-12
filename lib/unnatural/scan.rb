@@ -6,7 +6,20 @@ module Unnatural
       enumerable.sort { |a, b| compare(a, b) }
     end
 
+    def self.sort_by(enumerable)
+      raise ArgumentError, "Block expected but none given" unless block_given?
+      enumerable
+        .map { |e| [(yield e), e] }
+        .sort { |a, b| compare(a, b) }
+        .map { |ary| ary[1] }
+    end
+
     def self.compare(a_string, b_string)
+      if a_string.is_a?(Array) && b_string.is_a?(Array)
+        a_string = a_string.first
+        b_string = b_string.first
+      end
+
       a = StringScanner.new(a_string)
       b = StringScanner.new(b_string)
 

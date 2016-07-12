@@ -19,6 +19,11 @@ module Unnatural
     @algorithm.sort(enumerable)
   end
 
+  def self.sort_by(enumerable)
+    raise ArgumentError, "Block expected but none given" unless block_given?
+    @algorithm.sort_by(enumerable) { |*a| yield(*a) }
+  end
+
   def self.compare(a, b)
     @algorithm.compare(a, b)
   end

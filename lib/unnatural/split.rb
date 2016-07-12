@@ -7,6 +7,11 @@ module Unnatural
       enumerable.sort_by { |s| split(s) }
     end
 
+    def self.sort_by(enumerable)
+      raise ArgumentError, "Block expected but none given" unless block_given?
+      enumerable.sort_by { |s| split(yield s) }
+    end
+
     def self.compare(a, b)
       split(a) <=> split(b)
     end

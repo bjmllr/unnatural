@@ -52,6 +52,33 @@ module Unnatural
           assert_equal array, mod.sort(array.reverse)
           assert_equal array, mod.sort(array.shuffle)
         end
+
+        it "sorts ascii strings with a block #{array.inspect}" do
+          assert_equal array, mod.sort_by(array) { |e| e }
+          assert_equal array, mod.sort_by(array.reverse) { |e| e }
+          assert_equal array, mod.sort_by(array.shuffle) { |e| e }
+        end
+
+        # examples from naturally gem
+        # https://github.com/dogweather/naturally
+        it 'sorts by an attribute' do
+          ubuntu_version = Struct.new(:name, :version)
+          releases = [
+            ubuntu_version.new('Saucy Salamander', '13.10'),
+            ubuntu_version.new('Raring Ringtail',  '13.04'),
+            ubuntu_version.new('Precise Pangolin', '12.04.4'),
+            ubuntu_version.new('Maverick Meerkat', '10.10'),
+            ubuntu_version.new('Quantal Quetzal',  '12.10'),
+            ubuntu_version.new('Lucid Lynx',       '10.04.4')
+          ]
+          actual = mod.sort_by(releases, &:version)
+          assert_equal ['Lucid Lynx',
+                        'Maverick Meerkat',
+                        'Precise Pangolin',
+                        'Quantal Quetzal',
+                        'Raring Ringtail',
+                        'Saucy Salamander'], actual.map(&:name)
+        end
       end
 
       if RUBY_ENGINE == 'jruby'

@@ -5,6 +5,12 @@ module Unnatural
       enumerable.sort_by { |s| substitute(s, largest) }
     end
 
+    def self.sort_by(enumerable)
+      raise ArgumentError, "Block expected but none given" unless block_given?
+      largest = enumerable.map { |e| yield e }.map(&:size).max
+      enumerable.sort_by { |s| substitute((yield s), largest) }
+    end
+
     def self.compare(a, b)
       largest = a.size < b.size ? b.size : a.size
       substitute(a, largest) <=> substitute(b, largest)

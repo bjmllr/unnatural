@@ -16,7 +16,7 @@ Unnatural does not (currently) provide support for:
 2. any number representation other than simple decimal integers
 3. whitespace insensitivity (i.e., one space and two spaces can be considered as different)
 
-Unnatural provides four algorithms, all of which use Ruby's built-in quicksort as the fundamental sort algorithm. All four modules provide module methods `.sort` for simply sorting an enumerable, and `.compare` for spaceship-operator-style comparison.
+Unnatural provides four algorithms, all of which use Ruby's built-in quicksort as the fundamental sort algorithm. All four modules provide module methods `.sort` for simply sorting an enumerable, `.sort_by` for a memoized sort according to a block, and `.compare` for spaceship-operator-style comparison.
 
 ### Unnatural::Fast
 
@@ -57,6 +57,13 @@ Sorting an enumerable of strings:
 ```ruby
 require 'unnatural'
 sorted = Unnatural.sort(some_array_of_strings)
+```
+
+Sorting an enumerable of objects according to a block:
+
+```ruby
+sorted = Unnatural.sort_by(some_array_of_objects) { |e| e.name }
+sorted = Unnatural.sort_by(some_array_of_objects, &:name)
 ```
 
 Defining the comparison method for a class explicitly:
