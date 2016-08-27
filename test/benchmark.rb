@@ -18,10 +18,7 @@ Benchmark.ips do |t|
   t.report('substitution') { Unnatural::Substitution.sort(strings) }
   t.report('split') { Unnatural::Split.sort(strings) }
   t.report('scan') { Unnatural::Scan.sort(strings) }
-
-  unless RUBY_ENGINE == 'jruby'
-    t.report('fast') { Unnatural::Fast.sort(strings) }
-  end
+  t.report('fast') { Unnatural::Fast.sort(strings) }
 
   t.compare!
 end

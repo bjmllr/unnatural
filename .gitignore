@@ -7,4 +7,5 @@
 /pkg/
 /spec/reports/
 /tmp/
-/lib/unnatural/fast_compare.so
+*.so
+*.o

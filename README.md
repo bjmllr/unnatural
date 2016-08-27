@@ -12,7 +12,7 @@ Unnatural defines a natural sort as one where:
 
 Unnatural does not (currently) provide support for:
 
-1. non-ASCII-compatible encoding
+1. non-ASCII-compatible encoding (although the pure ruby comparison functions seem to work)
 2. any number representation other than simple decimal integers
 3. whitespace insensitivity (i.e., one space and two spaces can be considered as different)
 
@@ -20,7 +20,7 @@ Unnatural provides four algorithms, all of which use Ruby's built-in quicksort a
 
 ### Unnatural::Fast
 
-Compares strings byte-by-byte. Comparison function implemented in C. Much faster than any of the pure Ruby options. The default, except on JRuby. Not available on JRuby.
+Compares strings byte-by-byte. Comparison function implemented in C. Does not appear to sort unicode strings correctly. Much faster than any of the pure Ruby options. The default.
 
 ### Unnatural::Scan
 
@@ -32,7 +32,7 @@ Compares strings by spliting them into arrays of alternating string and integer 
 
 ### Unnatural::Substitution
 
-Compares strings by zero-padding integer sequences such that all are the same length. Pure Ruby. Tends to be outperformed by `Unnatural::Scan` on longer strings. The default on JRuby.
+Compares strings by zero-padding integer sequences such that all are the same length. Pure Ruby. Tends to be outperformed by `Unnatural::Scan` on longer strings. Recommended for sorting short unicode strings.
 
 ## Installation
 
@@ -96,7 +96,6 @@ The default can be changed throughout an application:
 
 ```ruby
 # use Scan instead of Fast
-# (or, if on JRruby, use Scan instead of Substitution)
 Unnatural.algorithm = Unnatural::Scan
 ```
 

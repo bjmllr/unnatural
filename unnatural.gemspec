@@ -14,18 +14,17 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/bjmllr/unnatural'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.files         = `git ls-files -z`.split("\x0")
+                       .reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files        += Dir.glob('ext/unnatural/*')
   spec.require_paths = ['lib']
 
-  unless RUBY_ENGINE == 'jruby'
-    spec.extensions << 'ext/unnatural/extconf.rb'
-  end
+  spec.extensions = ['ext/unnatural/Rakefile']
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rake-compiler', '~>0.9'
+  spec.add_dependency 'ffi-compiler', '~> 1.0'
+  spec.add_dependency 'rake', '~> 10.0'
+
+  spec.add_development_dependency 'bundler', '~> 1.12'
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'benchmark-ips'
 end
