@@ -3,5 +3,8 @@ Naming/UncommunicativeMethodParamName:
     - a
     - b
 
+Style/ExpandPathArguments:
+  Enforced: false
+
 Style/NumericPredicate:
   EnforcedStyle: comparison
