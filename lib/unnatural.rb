@@ -3,7 +3,7 @@ require 'unnatural/version'
 # A natural sort.
 module Unnatural
   def self.algorithms
-    %i[Substitution Split Scan Fast]
+    [:Substitution, :Split, :Scan, :Fast]
       .select { |name| const_defined?(name) }
       .map { |name| const_get(name) }
   end

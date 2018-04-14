@@ -10,7 +10,7 @@ module Unnatural
     module Ext
       extend FFI::Library
       ffi_lib FFI::Compiler::Loader.find('unnatural_ext')
-      attach_function :compare, %i[string int string int], :int
+      attach_function :compare, [:string, :int, :string, :int], :int
     end
 
     def self.compare(a, b)

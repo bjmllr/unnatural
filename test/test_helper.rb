@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+$LOAD_PATH.unshift File.expand_path('lib', __FILE__)
 require 'unnatural'
 require 'unnatural/fast'
 require 'unnatural/scan'

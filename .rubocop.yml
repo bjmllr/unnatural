@@ -4,7 +4,10 @@ Naming/UncommunicativeMethodParamName:
     - b
 
 Style/ExpandPathArguments:
-  Enforced: false
+  Enabled: false
 
 Style/NumericPredicate:
   EnforcedStyle: comparison
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
