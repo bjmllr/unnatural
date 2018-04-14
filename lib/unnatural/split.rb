@@ -1,4 +1,6 @@
 module Unnatural
+  # Compares strings by spliting them into arrays of alternating string and
+  # integer values. Pure Ruby. Tends to be outperformed by the others.
   module Split
     SPLITTER = /(?<=\d)(?=\D)|(?<=\D)(?=\d)/
     PRED = ['0'.ord.pred.chr].freeze
@@ -8,7 +10,7 @@ module Unnatural
     end
 
     def self.sort_by(enumerable)
-      raise ArgumentError, "Block expected but none given" unless block_given?
+      raise ArgumentError, 'Block expected but none given' unless block_given?
       enumerable.sort_by { |s| split(yield s) }
     end
 

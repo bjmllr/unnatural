@@ -1,8 +1,9 @@
 require 'unnatural/version'
 
+# A natural sort.
 module Unnatural
   def self.algorithms
-    [:Substitution, :Split, :Scan, :Fast]
+    %i[Substitution Split Scan Fast]
       .select { |name| const_defined?(name) }
       .map { |name| const_get(name) }
   end
@@ -20,7 +21,7 @@ module Unnatural
   end
 
   def self.sort_by(enumerable)
-    raise ArgumentError, "Block expected but none given" unless block_given?
+    raise ArgumentError, 'Block expected but none given' unless block_given?
     @algorithm.sort_by(enumerable) { |*a| yield(*a) }
   end
 

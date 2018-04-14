@@ -2,11 +2,15 @@ require 'ffi'
 require 'ffi-compiler/loader'
 
 module Unnatural
+  # Compares strings byte-by-byte. Comparison function implemented in C. Does
+  # not appear to sort unicode strings correctly. Much faster than any of the
+  # pure Ruby options. The default.
   module Fast
+    # module to hold the C function
     module Ext
       extend FFI::Library
       ffi_lib FFI::Compiler::Loader.find('unnatural_ext')
-      attach_function :compare, [:string, :int, :string, :int], :int
+      attach_function :compare, %i[string int string int], :int
     end
 
     def self.compare(a, b)

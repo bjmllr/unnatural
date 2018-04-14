@@ -24,4 +24,4 @@ namespace 'ffi-compiler' do
 end
 task compile_ffi: ['ffi-compiler:default']
 
-task default: [:clean, :compile_ffi, :test]
+task default: %i[clean compile_ffi test]

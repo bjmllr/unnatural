@@ -1,0 +1,7 @@
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - a
+    - b
+
+Style/NumericPredicate:
+  EnforcedStyle: comparison

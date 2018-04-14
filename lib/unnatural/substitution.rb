@@ -1,4 +1,7 @@
 module Unnatural
+  # Compares strings by zero-padding integer sequences such that all are the
+  # same length. Pure Ruby. Tends to be outperformed by `Unnatural::Scan` on
+  # longer strings. Recommended for sorting short unicode strings.
   module Substitution
     def self.sort(enumerable)
       largest = enumerable.map(&:size).max
@@ -6,7 +9,7 @@ module Unnatural
     end
 
     def self.sort_by(enumerable)
-      raise ArgumentError, "Block expected but none given" unless block_given?
+      raise ArgumentError, 'Block expected but none given' unless block_given?
       largest = enumerable.map { |e| yield e }.map(&:size).max
       enumerable.sort_by { |s| substitute((yield s), largest) }
     end
