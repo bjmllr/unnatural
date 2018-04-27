@@ -23,7 +23,6 @@ Gem::Specification.new do |spec|
   spec.extensions = ['ext/unnatural/Rakefile']
 
   spec.add_dependency 'ffi-compiler', '~> 1.0'
-  spec.add_dependency 'rake', '>= 9', '< 12'
 
   spec.add_development_dependency 'benchmark-ips'
   spec.add_development_dependency 'bundler', '~> 1.12'
